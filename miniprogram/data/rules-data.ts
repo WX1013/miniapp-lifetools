@@ -1,0 +1,58 @@
+export type RuleItem = {
+  id: string
+  name: string
+  detail: string
+  options: string[]
+}
+
+export type RulesData = {
+  title: string
+  version: string
+  intro: string
+  ruleItems: RuleItem[]
+  basicNotes: string[]
+}
+
+export const RULES_DATA: RulesData = {
+  title: '杭州麻将规则与组局说明',
+  version: '2026-03',
+  intro: '以下为常用杭麻组局约定，可按你们牌友习惯调整。',
+  ruleItems: [
+    {
+      id: 'chiRule',
+      name: '吃牌规则',
+      detail: '部分牌局默认不可吃，避免节奏拖慢。',
+      options: ['不可吃', '可吃'],
+    },
+    {
+      id: 'windRule',
+      name: '风牌设置',
+      detail: '是否包含东南西北及中发白。',
+      options: ['带风牌', '不带风牌'],
+    },
+    {
+      id: 'winRule',
+      name: '胡牌方式',
+      detail: '开局前明确是否支持点炮胡，避免结算争议。',
+      options: ['自摸+点炮', '仅自摸'],
+    },
+    {
+      id: 'drawRule',
+      name: '流局处理',
+      detail: '荒庄后是否连庄、是否计分，建议统一。',
+      options: ['荒庄连庄', '荒庄不连庄'],
+    },
+    {
+      id: 'scoreRule',
+      name: '结算方式',
+      detail: '可按基础分/封顶番执行，也可另行约定。',
+      options: ['基础分+杠分', '按番结算（约定上限）'],
+    },
+  ],
+  basicNotes: [
+    '4人玩法，常用136张牌（万条筒+字牌）。',
+    '每人13张，庄家14张先出牌。',
+    '碰、杠、胡通常允许；吃牌以组局约定为准。',
+    '争议按开局前约定处理。',
+  ],
+}

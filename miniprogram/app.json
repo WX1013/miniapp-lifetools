@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/generate/index",
+    "pages/rules/index",
+    "pages/feedback/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f4f6fb"
+  },
+  "tabBar": {
+    "color": "#6b7280",
+    "selectedColor": "#2563eb",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/generate/index",
+        "text": "组局消息"
+      },
+      {
+        "pagePath": "pages/rules/index",
+        "text": "杭麻规则"
+      },
+      {
+        "pagePath": "pages/feedback/index",
+        "text": "我要反馈"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
