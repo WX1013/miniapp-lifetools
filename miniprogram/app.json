@@ -17,15 +17,21 @@
     "list": [
       {
         "pagePath": "pages/generate/index",
-        "text": "组局消息"
+        "text": "组局消息",
+        "iconPath": "data/msg.png",
+        "selectedIconPath": "data/msg.png"
       },
       {
         "pagePath": "pages/rules/index",
-        "text": "杭麻规则"
+        "text": "杭麻规则",
+        "iconPath": "data/rule.png",
+        "selectedIconPath": "data/rule.png"
       },
       {
         "pagePath": "pages/feedback/index",
-        "text": "我要反馈"
+        "text": "我要反馈",
+        "iconPath": "data/feedback.png",
+        "selectedIconPath": "data/feedback.png"
       }
     ]
   },

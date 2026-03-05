@@ -1,24 +1,40 @@
 <view class="page">
-  <view class="card head-card">
-    <view class="section-title">{{title}}</view>
-    <view class="sub">版本：{{version}}</view>
-    <view class="intro">{{intro}}</view>
-  </view>
-
   <view class="card section-card">
-    <view class="section-name">基础说明</view>
-    <block wx:for="{{basicNotes}}" wx:key="*this" wx:for-item="note" wx:for-index="idx">
-      <view class="rule-item">{{idx + 1}}. {{note}}</view>
+    <view class="section-name">杭麻规则说明</view>
+
+    <view class="sub-title">常见胡法说明</view>
+    <block wx:for="{{hufaList}}" wx:key="title" wx:for-item="item">
+      <view class="item-card">
+        <view class="item-title">{{item.title}}</view>
+        <view class="item-detail">{{item.detail}}</view>
+        <view class="item-options" wx:if="{{item.options}}">{{item.options}}</view>
+      </view>
+    </block>
+    <view class="note">{{hufaNote}}</view>
+
+    <view class="sub-title">规则说明</view>
+    <block wx:for="{{ruleList}}" wx:key="title" wx:for-item="item">
+      <view class="item-card">
+        <view class="item-title">{{item.title}}</view>
+        <view class="item-detail">{{item.detail}}</view>
+        <view class="item-options" wx:if="{{item.options}}">{{item.options}}</view>
+      </view>
     </block>
   </view>
 
   <view class="card section-card">
-    <view class="section-name">可配置规则项</view>
-    <block wx:for="{{ruleItems}}" wx:key="id" wx:for-item="rule" wx:for-index="idx">
-      <view class="config-item">
-        <view class="config-title">{{idx + 1}}. {{rule.name}}</view>
-        <view class="config-detail">{{rule.detail}}</view>
-        <view class="config-options">选项：{{rule.optionsText}}</view>
+    <view class="section-name">翻倍计算方式</view>
+
+    <view class="sub-title">计算说明</view>
+    <block wx:for="{{calcSummary}}" wx:key="*this" wx:for-item="line" wx:for-index="idx">
+      <view class="line-item">{{idx + 1}}. {{line}}</view>
+    </block>
+
+    <view class="sub-title">示例</view>
+    <block wx:for="{{calcCases}}" wx:key="title" wx:for-item="item">
+      <view class="item-card">
+        <view class="item-title">{{item.title}}</view>
+        <view class="item-detail">{{item.detail}}</view>
       </view>
     </block>
   </view>

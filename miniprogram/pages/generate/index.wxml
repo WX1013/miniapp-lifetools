@@ -1,73 +1,164 @@
 <view class="page">
-  <view class="card top-card">
-    <view class="section-title">组局消息生成器</view>
-    <view class="sub">按规则项选择后自动拼装组局文案，支持再次修改。</view>
+  <view class="card alert-card">
+    <view class="alert-title">财神对你说</view>
+    <view class="alert-text">{{alertText}}</view>
   </view>
 
   <view class="card form-card">
-    <view class="section-title small">组局信息</view>
-    <view class="field">
-      <text class="label">日期</text>
-      <picker mode="date" value="{{form.gameDate}}" start="2020-01-01" end="2099-12-31" bindchange="onPickDate">
-        <view class="picker">{{form.gameDate || '请选择日期'}}</view>
-      </picker>
+    <view class="section-title">规则设置</view>
+
+    <view class="field-row">
+      <view class="label">玩法</view>
+      <view class="content">
+        <view class="chip-row">
+          <block wx:for="{{playModeOptions}}" wx:key="*this" wx:for-item="item">
+            <view class="chip {{form.playMode === item ? 'active' : ''}}" data-key="playMode" data-value="{{item}}" bindtap="onSelectSingle">{{item}}</view>
+          </block>
+        </view>
+      </view>
     </view>
 
-    <view class="field">
-      <text class="label">时间</text>
-      <picker mode="time" value="{{form.gameTime}}" bindchange="onPickTime">
-        <view class="picker">{{form.gameTime}}</view>
-      </picker>
+    <view class="field-row">
+      <view class="label">吃碰</view>
+      <view class="content">
+        <view class="chip-row">
+          <block wx:for="{{chiPengViews}}" wx:key="label" wx:for-item="item">
+            <view class="chip {{item.selected ? 'active' : ''}}" data-key="chiPeng" data-value="{{item.label}}" bindtap="onToggleMulti">{{item.label}}</view>
+          </block>
+        </view>
+      </view>
     </view>
 
-    <view class="field">
-      <text class="label">地点</text>
-      <input class="input" data-key="location" value="{{form.location}}" placeholder="如：滨江区某某茶室" bindinput="onInput" />
+    <view class="field-row">
+      <view class="label">翻倍</view>
+      <view class="content">
+        <view class="chip-row">
+          <block wx:for="{{fanPanViews}}" wx:key="label" wx:for-item="item">
+            <view class="chip {{item.selected ? 'active' : ''}}" data-key="fanPan" data-value="{{item.label}}" bindtap="onToggleMulti">{{item.label}}</view>
+          </block>
+        </view>
+      </view>
     </view>
 
-    <view class="field">
-      <text class="label">局数</text>
-      <input class="input" data-key="rounds" value="{{form.rounds}}" placeholder="如：8圈" bindinput="onInput" />
+    <view class="field-row">
+      <view class="label">守庄</view>
+      <view class="content">
+        <view class="chip-row">
+          <block wx:for="{{shouZhuangViews}}" wx:key="label" wx:for-item="item">
+            <view class="chip {{item.selected ? 'active' : ''}}" data-key="shouZhuang" data-value="{{item.label}}" bindtap="onToggleMulti">{{item.label}}</view>
+          </block>
+        </view>
+      </view>
     </view>
 
-    <view class="field">
-      <text class="label">费用方式</text>
-      <picker mode="selector" range="{{payTypeOptions}}" value="{{form.payTypeIndex}}" bindchange="onPickPayType">
-        <view class="picker">{{payTypeOptions[form.payTypeIndex]}}</view>
-      </picker>
+    <view class="field-row">
+      <view class="label">杠白</view>
+      <view class="content">
+        <view class="chip-row">
+          <block wx:for="{{gangBaiOptions}}" wx:key="*this" wx:for-item="item">
+            <view class="chip {{form.gangBai === item ? 'active' : ''}}" data-key="gangBai" data-value="{{item}}" bindtap="onSelectSingle">{{item}}</view>
+          </block>
+        </view>
+      </view>
     </view>
 
-    <view class="field">
-      <text class="label">联系方式</text>
-      <input class="input" data-key="contact" value="{{form.contact}}" placeholder="微信号或手机号" bindinput="onInput" />
+    <view class="field-row">
+      <view class="label">跟庄</view>
+      <view class="content">
+        <view class="chip-row">
+          <block wx:for="{{genZhuangOptions}}" wx:key="*this" wx:for-item="item">
+            <view class="chip {{form.genZhuang === item ? 'active' : ''}}" data-key="genZhuang" data-value="{{item}}" bindtap="onSelectSingle">{{item}}</view>
+          </block>
+        </view>
+      </view>
     </view>
 
-    <view class="field">
-      <text class="label">备注</text>
-      <textarea class="textarea" data-key="note" value="{{form.note}}" maxlength="200" bindinput="onInput" placeholder="如：禁烟，迟到发红包"></textarea>
+    <view class="field-row">
+      <view class="label">封顶</view>
+      <view class="content">
+        <view class="chip-row">
+          <block wx:for="{{capOptions}}" wx:key="*this" wx:for-item="item">
+            <view class="chip {{form.cap === item ? 'active' : ''}}" data-key="cap" data-value="{{item}}" bindtap="onSelectSingle">{{item}}</view>
+          </block>
+        </view>
+      </view>
     </view>
-  </view>
 
-  <view class="card form-card">
-    <view class="section-title small">规则项选择</view>
-    <block wx:for="{{ruleSelections}}" wx:key="ruleId" wx:for-item="rule">
-      <view class="field">
-        <text class="label">{{rule.ruleName}}</text>
-        <picker mode="selector" range="{{rule.options}}" value="{{rule.selectedIndex}}" data-rule-id="{{rule.ruleId}}" bindchange="onPickRule">
-          <view class="picker">{{rule.options[rule.selectedIndex]}}</view>
+    <view class="field-row">
+      <view class="label">大小</view>
+      <view class="content right-input">
+        <view class="stepper">
+          <view class="stepper-value">{{form.moneySize}}</view>
+          <view class="stepper-actions">
+            <view class="stepper-btn" data-delta="1" bindtap="onAdjustMoneySize">▲</view>
+            <view class="stepper-btn" data-delta="-1" bindtap="onAdjustMoneySize">▼</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="field-row">
+      <view class="label">时间</view>
+      <view class="content right-content">
+        <view class="chip-row">
+          <block wx:for="{{timeModeOptions}}" wx:key="*this" wx:for-item="item">
+            <view class="chip {{form.timeMode === item ? 'active' : ''}}" data-key="timeMode" data-value="{{item}}" bindtap="onSelectSingle">{{item}}</view>
+          </block>
+        </view>
+        <picker wx:if="{{form.timeMode === '指定时间'}}" class="right-picker" mode="multiSelector" range="{{timeColumns}}" value="{{timePickerValue}}" bindchange="onPickTime">
+          <view class="picker compact-picker">{{form.startTime}}</view>
         </picker>
       </view>
-    </block>
-
-    <view class="btn-row">
-      <button class="btn primary" bindtap="onGenerate">生成消息</button>
-      <button class="btn" bindtap="onReset">重置</button>
     </view>
+
+    <view class="field-row">
+      <view class="label">时长</view>
+      <view class="content right-input">
+        <view class="stepper">
+          <view class="stepper-value">{{form.durationPreset}}小时</view>
+          <view class="stepper-actions">
+            <view class="stepper-btn" data-delta="1" bindtap="onAdjustDurationPreset">▲</view>
+            <view class="stepper-btn" data-delta="-1" bindtap="onAdjustDurationPreset">▼</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="field-row">
+      <view class="label">人数</view>
+      <view class="content">
+        <view class="chip-row">
+          <block wx:for="{{peopleOptions}}" wx:key="*this" wx:for-item="item">
+            <view class="chip {{form.people === item ? 'active' : ''}}" data-key="people" data-value="{{item}}" bindtap="onSelectSingle">{{item}}</view>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <view class="field-row">
+      <view class="label">抽烟</view>
+      <view class="content">
+        <view class="chip-row">
+          <block wx:for="{{smokeOptions}}" wx:key="*this" wx:for-item="item">
+            <view class="chip {{form.smoke === item ? 'active' : ''}}" data-key="smoke" data-value="{{item}}" bindtap="onSelectSingle">{{item}}</view>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <view class="field-row">
+      <view class="label">备注</view>
+      <view class="content">
+        <textarea class="textarea" value="{{form.remark}}" maxlength="200" bindinput="onInputRemark" placeholder="可补充其他说明" auto-height="false"></textarea>
+      </view>
+    </view>
+
+    <button class="btn" bindtap="onReset">恢复默认</button>
   </view>
 
   <view class="card output-card">
     <view class="section-title">生成结果</view>
-    <view class="output">{{generatedText || '点击“生成消息”后展示文本内容'}}</view>
-    <button class="btn primary copy-btn" bindtap="onCopy">复制消息</button>
+    <view class="output">{{generatedText}}</view>
+    <button class="btn primary" bindtap="onCopy">复制消息</button>
   </view>
 </view>
