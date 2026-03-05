@@ -9,7 +9,7 @@ Component({
     hufaList: [
       {
         title: '1. 平胡',
-        detail: '无白自摸。',
+        detail: '没有财神的自摸',
         options: '选项：财敲：有财必敲 / 自摸：有财可自摸',
       },
       {
