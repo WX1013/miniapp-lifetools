@@ -106,4 +106,18 @@ Component({
       },
     ] as Array<{ title: string; detail: string }>,
   },
+  methods: {
+    onShareAppMessage() {
+      return {
+        title: '杭麻规则说明',
+        path: '/pages/rules/index',
+      }
+    },
+    onShareTimeline() {
+      return {
+        title: '杭麻规则说明',
+        query: '',
+      }
+    },
+  },
 })

@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "杭麻规则"
+  "navigationBarTitleText": "杭麻规则",
+  "enableShareAppMessage": true,
+  "enableShareTimeline": true
 }

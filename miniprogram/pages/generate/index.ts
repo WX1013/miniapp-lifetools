@@ -282,5 +282,17 @@ Component({
     onReset() {
       this.syncForm(defaultForm)
     },
+    onShareAppMessage() {
+      return {
+        title: this.data.generatedText || '✨杭麻组局✨',
+        path: '/pages/generate/index',
+      }
+    },
+    onShareTimeline() {
+      return {
+        title: this.data.generatedText || '✨杭麻组局✨',
+        query: '',
+      }
+    },
   },
 })

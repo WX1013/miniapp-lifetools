@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "组局消息"
+  "navigationBarTitleText": "组局消息",
+  "enableShareAppMessage": true,
+  "enableShareTimeline": true
 }
